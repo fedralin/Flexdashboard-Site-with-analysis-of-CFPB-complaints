@@ -23,6 +23,7 @@ library(htmlwidgets)
 library(htmltools)
 library(readxl)
 
+complaints <- "complaints.rds"
 
 ```
 
@@ -37,10 +38,6 @@ Companies with Most Complaints
 
 ```{r}
 
-topcompanies <- complaints %>%
-  group_by(company) %>%
-  summarize(totalcomplaints = n()) %>%
-  arrange(desc(totalcomplaints)) 
 
 topcompanies
 
