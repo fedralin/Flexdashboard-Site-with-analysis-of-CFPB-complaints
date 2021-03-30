@@ -38,7 +38,7 @@ Companies with Most Complaints
 topcompanies <- complaints %>%
   group_by(company) %>%
   summarize(totalcomplaints = n()) %>%
-  arrange(desc(totalcomplaints))
+  arrange(desc(totalcomplaints)) 
 
 topcompanies
 
@@ -78,4 +78,26 @@ Responsesdonut <- Responsesdonut %>% layout(
 Responsesdonut
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Most Common Issues Reported
+========================================
+```{r}
+
+topissues <- complaints %>%
+  group_by(issue) %>%
+  summarize(totalissues = n()) %>%
+  arrange(desc(totalissues)) 
+
+top10issues <- topissues %>%
+  head(10)
+
+top10issues
+
+mostcommonissueschart <- top10issues %>%
+    plot_ly(x = ~issue, y = ~totalissues, type = 'bar') %>% 
+        layout(title = "Top 10 Most Commonly Reported Issues",
+         xaxis = list(title = "Reported Issue"),
+         yaxis = list (title = "Total Number Reported"))
+
+mostcommonissueschart
+```
+
