@@ -37,8 +37,8 @@ Companies with Most Complaints
 ```{r}
 topcompanies <- complaints %>%
   group_by(company) %>%
-  summarize(companytotalcomplaints = n()) %>%
-  arrange(desc(companytotalcomplaints))
+  summarize(totalcomplaints = n()) %>%
+  arrange(desc(totalcomplaints))
 
 topcompanies
 
@@ -48,12 +48,34 @@ top10companies <- topcompanies %>%
 top10companies
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
+Breakdown of Company Responses
+======================================
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+
+responsesbreakdown <- complaints %>%
+  group_by(company_response_to_consumer) %>%
+  summarize(totalresponses = n()) %>%
+  arrange(desc(totalresponses)) %>%
+  head(5)
+ 
+responsesbreakdown
+
+Parts <- c('Closed with explanation','Closed with non-monetary relief', 'Closed with monetary relief', 'In progress', 'Untimely Response')
+Responses <- c(354555, 20182, 10523,6660, 1129)
+Totalresponses <- data.frame(Parts, Responses)
+
+Responsesdonut <- Totalresponses %>% plot_ly(labels = ~Parts, values = ~Responses)
+
+Responsesdonut <- Responsesdonut %>% add_pie(hole = 0.6)
+
+Responsesdonut <- Responsesdonut %>% layout(
+                  title = "Breakdown of Total Received Responses",  showlegend = F,
+                  xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                  yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+Responsesdonut
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
