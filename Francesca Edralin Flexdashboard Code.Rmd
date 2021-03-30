@@ -23,6 +23,7 @@ library(htmlwidgets)
 library(htmltools)
 library(readxl)
 
+
 ```
 
 ## R Markdown
@@ -35,6 +36,7 @@ Companies with Most Complaints
 ==============================================
 
 ```{r}
+
 topcompanies <- complaints %>%
   group_by(company) %>%
   summarize(totalcomplaints = n()) %>%
@@ -46,6 +48,7 @@ top10companies <- topcompanies %>%
   head(10)
 
 top10companies
+
 ```
 
 
@@ -95,7 +98,7 @@ top10issues
 mostcommonissueschart <- top10issues %>%
     plot_ly(x = ~issue, y = ~totalissues, type = 'bar') %>% 
         layout(title = "Top 10 Most Commonly Reported Issues",
-         xaxis = list(title = "Reported Issue"),
+         xaxis = list(title = " "),
          yaxis = list (title = "Total Number Reported"))
 
 mostcommonissueschart
